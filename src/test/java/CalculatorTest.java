@@ -26,4 +26,16 @@ class CalculatorTest {
         assertEquals(12, c.multiply(4, 3));
     }
 
+    @Test
+    void testDivide() {
+        Calculator c = new Calculator();
+        assertEquals(2, c.divide(6, 3));
+    }
+    @Test
+    void testDivideByZero() {
+        Calculator c = new Calculator();
+        assertThrows(IllegalArgumentException.class, () -> c.divide(4, 0));
+    }
+    
+
 }
