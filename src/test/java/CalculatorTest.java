@@ -20,4 +20,10 @@ class CalculatorTest {
         assertEquals(1, c.subtract(4, 3));
     }
 
+    @Test
+    void testMultiply() {      
+        Calculator c = new Calculator();
+        assertEquals(12, c.multiply(4, 3));
+    }
+
 }
