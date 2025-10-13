@@ -1,6 +1,8 @@
 package test.java;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import main.java.Calculator;
 
@@ -37,5 +39,16 @@ class CalculatorTest {
         assertThrows(IllegalArgumentException.class, () -> c.divide(4, 0));
     }
     
+    @ParameterizedTest  
+    @CsvSource({        
+        "0, 0, 0",     
+        "1, 2, 3",     
+        "-1, 3, 2",    
+        "5, -3, 2"     
+    })
+    void testAddParameterized(int a, int b, int expected) {
+        Calculator c = new Calculator();
+        assertEquals(expected, c.add(a, b));
+    }
 
 }
