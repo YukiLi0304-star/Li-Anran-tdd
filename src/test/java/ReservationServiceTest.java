@@ -25,7 +25,7 @@ public class ReservationServiceTest {
         bookRepo.save(book);
     
         reservationService.reserve("001", "001");
-        boolean exists = reservationRepo.existsByUserAndBook("U001", "B001");
+        boolean exists = reservationRepo.existsByUserAndBook("001", "001");
         assertTrue(exists);
     
     }
