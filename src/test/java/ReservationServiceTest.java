@@ -40,4 +40,10 @@ public class ReservationServiceTest {
         assertEquals(3, updatedBook.getCopiesAvailable());
     }
 
+    @Test
+    void reserveNoBook(){
+        assertThrows(IllegalArgumentException.class, () -> {
+        reservationService.reserve("001", "No Book");
+        });
+    }
 }
