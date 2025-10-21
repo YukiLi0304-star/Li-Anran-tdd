@@ -51,7 +51,18 @@ public class ReservationServiceTest {
     void reserveNoCopiesAvailable(){
         Book book = new Book("001", "Book1", 0);
         bookRepo.save(book);
-        
+
+        assertThrows(IllegalStateException.class, () -> {
+            reservationService.reserve("001", "001");
+        });
+    }
+
+    @Test
+    void reserveUserAlreadyReserved(){
+        Book book = new Book("001", "Book1", 4);
+        bookRepo.save(book);
+        reservationService.reserve("001", "001");
+
         assertThrows(IllegalStateException.class, () -> {
             reservationService.reserve("001", "001");
         });
