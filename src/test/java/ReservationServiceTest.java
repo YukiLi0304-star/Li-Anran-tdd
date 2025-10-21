@@ -30,4 +30,14 @@ public class ReservationServiceTest {
     
     }
 
+    @Test
+    void reserveDecreaseBookCopies() {
+        Book book = new Book("001", "Book1", 4);
+        bookRepo.save(book);
+ 
+        reservationService.reserve("001", "001");
+        Book updatedBook = bookRepo.findById("001");
+        assertEquals(3, updatedBook.getCopiesAvailable());
+    }
+
 }
