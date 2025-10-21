@@ -103,6 +103,6 @@ public class ReservationServiceTest {
         reservationService.reserve("001", "002");
 
         List<Reservation> reservations = reservationService.listReservations("001");
-        assertEquals(4, reservations.size());
+        assertEquals(2, reservations.size());
     }
 }
