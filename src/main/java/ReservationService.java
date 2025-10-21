@@ -70,6 +70,6 @@ public class ReservationService {
      */
     public List<Reservation> listReservationsForBook(String bookId) {
         // TODO: Implement using TDD
-        return null;
+        return reservationRepo.findByBook(bookId);
     }
 }

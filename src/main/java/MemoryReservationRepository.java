@@ -23,6 +23,12 @@ public class MemoryReservationRepository implements IReservationRepository {
                 .filter(r -> r.getUserId().equals(userId))
                 .toList();
     }
+    @Override
+    public List<Reservation> findByBook(String bookId) {
+        return reservations.stream()
+                .filter(r -> r.getBookId().equals(bookId))
+                .toList();
+    }
 
     @Override
     public void delete(String userId, String bookId) {
