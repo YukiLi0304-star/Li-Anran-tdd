@@ -116,4 +116,15 @@ public class ReservationServiceTest {
         List<Reservation> reservations =reservationService.listReservationsForBook("001");
         assertEquals(2, reservations.size());
     }
+
+    @Test
+    void reserveTheLastCopy(){
+        Book book = new Book("001", "Book1", 1);
+        bookRepo.save(book);
+        reservationService.reserve("001", "001");
+
+        Book updatedBook = bookRepo.findById("001");
+        assertEquals(0, updatedBook.getCopiesAvailable());
+        assertTrue(reservationRepo.existsByUserAndBook("001","001"));
+    }
 }
