@@ -67,4 +67,16 @@ public class ReservationServiceTest {
             reservationService.reserve("001", "001");
         });
     }
+
+    //Cancel test
+    @Test
+    void cancelExistingReservationIncreaseCopies(){
+        Book book = new Book("001", "Book1", 4);
+        bookRepo.save(book);
+        reservationService.reserve("001", "001");
+        reservationService.cancel("001", "001");
+
+        Book updatedBook = bookRepo.findById("001");
+        assertEquals(4, updatedBook.getCopiesAvailable());
+    }
 }
