@@ -105,4 +105,15 @@ public class ReservationServiceTest {
         List<Reservation> reservations = reservationService.listReservations("001");
         assertEquals(2, reservations.size());
     }
+
+    @Test
+    void listAllReservationsForABook(){
+        Book book = new Book("001", "Book1", 4);
+        bookRepo.save(book);
+        reservationService.reserve("001", "001");
+        reservationService.reserve("002", "001");
+
+        List<Reservation> reservations =reservationService.listReservationsForBook("001");
+        assertEquals(2, reservations.size());
+    }
 }
