@@ -28,6 +28,10 @@ public class ReservationService {
             throw new IllegalStateException("Not copies available!");
         }
 
+        if(reservationRepo.existsByUserAndBook(userId, bookId)){
+            throw new IllegalStateException("UserAlreadyReserved" + bookId);
+        }
+
         Reservation reservation = new Reservation(userId, bookId);
         reservationRepo.save(reservation);
 
