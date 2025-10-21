@@ -19,7 +19,11 @@ public class ReservationService {
     public void reserve(String userId, String bookId) {
         // TODO: Implement using TDD 
         Book book = bookRepo.findById(bookId);
-        
+
+        if (book == null) {
+            throw new IllegalArgumentException("Not found: " + bookId);
+        }
+
         Reservation reservation = new Reservation(userId, bookId);
         reservationRepo.save(reservation);
 
