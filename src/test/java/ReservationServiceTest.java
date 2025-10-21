@@ -79,4 +79,14 @@ public class ReservationServiceTest {
         Book updatedBook = bookRepo.findById("001");
         assertEquals(4, updatedBook.getCopiesAvailable());
     }
+
+    @Test
+    void cancelNoReservationExists(){
+        Book book = new Book("001", "Book1", 4);
+        bookRepo.save(book);
+        
+        assertThrows(IllegalArgumentException.class, () -> {
+            reservationService.cancel("001", "001");
+        });
+    }
 }
