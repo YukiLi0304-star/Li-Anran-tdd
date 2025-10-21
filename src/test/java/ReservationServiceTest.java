@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import main.java.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
 public class ReservationServiceTest {
     private ReservationService reservationService;
     private IBookRepository bookRepo;
@@ -84,9 +87,22 @@ public class ReservationServiceTest {
     void cancelNoReservationExists(){
         Book book = new Book("001", "Book1", 4);
         bookRepo.save(book);
-        
+
         assertThrows(IllegalArgumentException.class, () -> {
             reservationService.cancel("001", "001");
         });
+    }
+
+    @Test
+    void listrReservationsForGivenUser(){
+        Book book = new Book("001", "Book1", 4);
+        Book book1 = new Book("002", "Book2", 4);
+        bookRepo.save(book);
+        bookRepo.save(book1);
+        reservationService.reserve("001", "001");
+        reservationService.reserve("001", "002");
+
+        List<Reservation> reservations = reservationService.listReservations("001");
+        assertEquals(4, reservations.size());
     }
 }
