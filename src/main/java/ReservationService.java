@@ -24,6 +24,10 @@ public class ReservationService {
             throw new IllegalArgumentException("Not found: " + bookId);
         }
 
+        if (book.getCopiesAvailable() <= 0) {
+            throw new IllegalStateException("Not copies available!");
+        }
+
         Reservation reservation = new Reservation(userId, bookId);
         reservationRepo.save(reservation);
 
