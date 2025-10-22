@@ -129,4 +129,15 @@ public class ReservationServiceTest {
         assertEquals(0, updatedBook.getCopiesAvailable());
         assertTrue(reservationRepo.existsByUserAndBook("001","001"));
     }
+
+    //Part C
+    @Test
+    void reserveAddPriorityToWaitingList(){
+        Book book = new Book("002", "Book1", 0);
+        bookRepo.save(book);
+        User priorityUser = new User("002", "PU1", true);
+        userRepo.save(priorityUser);
+
+        assertDoesNotThrow(() -> reservationService.reserve("002", "002"));
+    }
 }
