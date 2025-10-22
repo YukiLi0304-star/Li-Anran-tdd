@@ -28,10 +28,11 @@ public class ReservationService {
         if (book == null) {
             throw new IllegalArgumentException("Not found: " + bookId);
         }
-
+        
         if (book.getCopiesAvailable() <= 0) {
             if (user != null && user.isPriority()) {
                 waitingLists.computeIfAbsent(bookId, k -> new LinkedList<>()).offer(userId);
+                return;
             }else{
                 throw new IllegalStateException("Not copies available!");
             }
