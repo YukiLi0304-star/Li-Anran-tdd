@@ -1,14 +1,18 @@
 package main.java;
 
 import java.util.List;
+import java.util.*;
 public class ReservationService {
 
     private final IBookRepository bookRepo;
     private final IReservationRepository reservationRepo;
+    private final IUserRepository userRepo;
+    private final Map<String, Queue<String>> waitingLists = new HashMap<>();
 
-    public ReservationService(IBookRepository bookRepo, IReservationRepository reservationRepo) {
+    public ReservationService(IBookRepository bookRepo, IReservationRepository reservationRepo,IUserRepository userRepo) {
         this.bookRepo = bookRepo;
         this.reservationRepo = reservationRepo;
+        this.userRepo = userRepo;
     }
 
     /**
@@ -25,7 +29,7 @@ public class ReservationService {
         }
 
         if (book.getCopiesAvailable() <= 0) {
-            throw new IllegalStateException("Not copies available!");
+                throw new IllegalStateException("Not copies available!");
         }
 
         if(reservationRepo.existsByUserAndBook(userId, bookId)){

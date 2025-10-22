@@ -13,12 +13,14 @@ public class ReservationServiceTest {
     private ReservationService reservationService;
     private IBookRepository bookRepo;
     private IReservationRepository reservationRepo;
+    private IUserRepository userRepo;
     
     @BeforeEach
     void setUp() {
+        userRepo = new MemoryUserRepository();
         bookRepo = new MemoryBookRepository();
         reservationRepo = new MemoryReservationRepository();
-        reservationService = new ReservationService(bookRepo, reservationRepo);
+        reservationService = new ReservationService(bookRepo, reservationRepo,userRepo);
     }
 
     @Test
