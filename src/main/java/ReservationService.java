@@ -65,6 +65,14 @@ public class ReservationService {
         book.setCopiesAvailable(book.getCopiesAvailable() + 1);
         bookRepo.save(book);
 
+        Queue<String> waitingQueue = waitingLists.get(bookId);
+        if (waitingQueue != null && !waitingQueue.isEmpty()) {
+            String nextUserId = waitingQueue.poll();
+            Reservation reservation = new Reservation(nextUserId, bookId);
+            reservationRepo.save(reservation);
+            book.setCopiesAvailable(book.getCopiesAvailable() - 1);
+            bookRepo.save(book);
+        }
     }
 
     /**
