@@ -72,6 +72,9 @@ public class ReservationService {
             reservationRepo.save(reservation);
             book.setCopiesAvailable(book.getCopiesAvailable() - 1);
             bookRepo.save(book);
+            if (waitingQueue.isEmpty()) {
+                waitingLists.remove(bookId);
+            }
         }
     }
 
