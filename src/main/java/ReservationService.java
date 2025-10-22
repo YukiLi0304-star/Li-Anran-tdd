@@ -22,6 +22,7 @@ public class ReservationService {
      */
     public void reserve(String userId, String bookId) {
         // TODO: Implement using TDD 
+        User user = userRepo.findById(userId);
         Book book = bookRepo.findById(bookId);
 
         if (book == null) {
@@ -29,7 +30,11 @@ public class ReservationService {
         }
 
         if (book.getCopiesAvailable() <= 0) {
+            if (user != null && user.isPriority()) {
+                waitingLists.computeIfAbsent(bookId, k -> new LinkedList<>()).offer(userId);
+            }else{
                 throw new IllegalStateException("Not copies available!");
+            }
         }
 
         if(reservationRepo.existsByUserAndBook(userId, bookId)){
