@@ -140,4 +140,24 @@ public class ReservationServiceTest {
 
         assertDoesNotThrow(() -> reservationService.reserve("002", "002"));
     }
+    @Test
+    void cancelCopyAvailableAutoAllocatePrioritory(){
+        Book book1 = new Book("002", "Book1", 1);
+        bookRepo.save(book1);
+        User user = new User("001", "U1");
+        userRepo.save(user);
+
+        reservationService.reserve("001", "002");
+
+        Book book = new Book("002", "Book1", 0);
+        bookRepo.save(book);
+        User priorityUser = new User("002", "PU1", true);
+        userRepo.save(priorityUser);
+
+        reservationService.reserve("002", "002");
+
+        reservationService.cancel("001", "002");
+
+        assertTrue(reservationRepo.existsByUserAndBook("002", "002"));
+    }
 }
