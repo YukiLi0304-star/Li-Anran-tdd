@@ -7,7 +7,14 @@ public class ReservationService {
     private final IBookRepository bookRepo;
     private final IReservationRepository reservationRepo;
     private final IUserRepository userRepo;
+    //1.Used DeepSeek AI for code optimization suggestions during Part C development
+    //Instruction: “Help me create a WaitingList entity class, IWaitingListRepository interface, and MemoryWaitingListRepository to implement priority users joining the waiting queue”
+    //AI will provide an answer, and at the end, recommend alternative optimization methods such as using 'private final Map<String, Queue<String>> waitingLists = new HashMap<>();' in ReservationService to avoid creating additional classes
     private final Map<String, Queue<String>> waitingLists = new HashMap<>();
+
+    //2.Used AI to help resolve some code error issues encountered during development
+    //Instruction: “Please help me check why this is giving an error”
+    //I will provide AI with a screenshot of my code error (this doesn't mean I'll consult AI for every single error - only when I've reviewed and attempted to solve it myself but still find it difficult to resolve). For such challenging issues, I choose to ask AI for help by providing instructions, and it will analyse why the error occurred and suggest solutions.
 
     public ReservationService(IBookRepository bookRepo, IReservationRepository reservationRepo,IUserRepository userRepo) {
         this.bookRepo = bookRepo;
